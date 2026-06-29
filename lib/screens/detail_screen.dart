@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../route_helper.dart';
 import 'profile_screen.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -33,7 +34,7 @@ class DetailScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                    createFadeRoute(const ProfileScreen()),
                   );
                 },
                 child: const Text('Go to Profile'),
