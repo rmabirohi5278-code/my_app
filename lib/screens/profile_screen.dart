@@ -73,26 +73,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            heroTag: 'add',
-            onPressed: () {
-              Navigator.push(
-                context,
-                createFadeRoute(const AddItemScreen()),
-              );
-            },
-            child: const Icon(Icons.add),
-          ),
+  heroTag: 'add',
+  onPressed: () async {
+    await Navigator.push(
+      context,
+      createFadeRoute(const AddItemScreen()),
+    );
+  },
+  child: const Icon(Icons.add),
+),
           const SizedBox(height: 12),
           FloatingActionButton(
-            heroTag: 'view',
-            onPressed: () {
-              Navigator.push(
-                context,
-                createFadeRoute(const SavedItemsScreen()),
-              );
-            },
-            child: const Icon(Icons.list),
-          ),
+  heroTag: 'view',
+  onPressed: () async {
+    await Navigator.push(
+      context,
+      createFadeRoute(const SavedItemsScreen()),
+    );
+  },
+  child: const Icon(Icons.list),
+),
         ],
       ),
       body: AnimatedOpacity(

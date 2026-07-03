@@ -14,6 +14,13 @@ class _AddItemScreenState extends State<AddItemScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
 
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
+
   Future<void> saveItem() async {
     final prefs = await SharedPreferences.getInstance();
     final existing = prefs.getStringList('items') ?? [];
@@ -58,10 +65,11 @@ class _AddItemScreenState extends State<AddItemScreen> {
               TextFormField(
                 controller: nameController,
                 style: const TextStyle(color: Colors.white),
-decoration: const InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Name',
                   labelStyle: TextStyle(color: Colors.white70),
-                ),                validator: (value) {
+                ),
+                validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Please enter a name';
                   }

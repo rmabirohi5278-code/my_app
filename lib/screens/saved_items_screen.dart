@@ -21,10 +21,26 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
   Future<void> loadItems() async {
     final prefs = await SharedPreferences.getInstance();
     final stored = prefs.getStringList('items') ?? [];
-
     setState(() {
-      items = stored.map((e) => jsonDecode(e) as Map<String, dynamic>).toList();
+      items = stored
+          .map((e) => jsonDecode(e) as Map<String, dynamic>)
+          .toList();
     });
+  }
+
+  Future<void> deleteItem(int index) async {
+    final prefs = await SharedPreferences.getInstance();
+    final stored = prefs.getStringList('items') ?? [];
+    stored.removeAt(index);
+    await prefs.setStringList('items', stored);
+    setState(() {
+      items.removeAt(index);
+    });
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Item deleted')),
+      );
+    }
   }
 
   @override
@@ -47,7 +63,7 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
             ? const Center(
                 child: Text(
                   'No items yet. Add one!',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               )
             : ListView.builder(
@@ -62,20 +78,32 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
                       color: Colors.white.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        Text(
-                          item['name'] ?? '',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item['name'] ?? '',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                item['email'] ?? '',
+                                style:
+                                    const TextStyle(color: Colors.white70),
+                              ),
+                            ],
                           ),
                         ),
-                        Text(
-                          item['email'] ?? '',
-                          style: const TextStyle(color: Colors.white70),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.redAccent),
+                          onPressed: () => deleteItem(index),
                         ),
                       ],
                     ),

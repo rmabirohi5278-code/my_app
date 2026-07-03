@@ -4,13 +4,15 @@ A Flutter app built during my internship, demonstrating navigation, state manage
 
 ## Features
 
-- **Home Screen** — persistent counter using local storage, navigates to Detail
+- **Home Screen** — persistent counter using local storage
 - **Detail Screen** — navigates to Profile
-- **Profile Screen** — fetches and displays a list of users from a public API, with loading and error handling
-- **Add Item Screen** — form with validation (name and email fields), saves entries locally
-- **Saved Items Screen** — displays all items saved through the Add Item form
-- Smooth fade transitions between screens
+- **Profile Screen** — fetches users from a public API with loading and error handling
+- **Add Item Screen** — form with name and email validation, saves entries locally
+- **Saved Items Screen** — displays all saved entries
+
+- Smooth fade transitions between all screens
 - Purple-to-black gradient theme throughout
+- Widget tests included
 
 ## Tech Used
 
@@ -24,12 +26,26 @@ A Flutter app built during my internship, demonstrating navigation, state manage
 1. Make sure Flutter SDK is installed.
 2. Clone this repository.
 3. Run `flutter pub get` to install dependencies.
-4. Run `flutter run -d chrome` to launch the app.
+4. Run `flutter run -d chrome` to launch in browser.
 
-## Screens
+## APK
 
-1. Home
-2. Detail
-3. Profile
-4. Add Item
-5. Saved Items
+The release APK is located at:
+`build/app/outputs/flutter-apk/app-release.apk`
+
+## Screenshots
+
+### Home
+![Home](screenshots/home.png)
+
+### Detail
+![Detail](screenshots/detail.png)
+
+### Profile
+![Profile](screenshots/profile.png)
+
+### Add Item
+![Add Item](screenshots/add_item.png)
+
+### Saved Items
+![Saved Items](screenshots/saved_items.png)
